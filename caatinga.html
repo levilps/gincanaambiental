@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caatinga - Gincana Verde</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4e7d1;
+            color: #6d4c41;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .header {
+            background-color: #8d5524;
+            color: white;
+            padding: 20px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .menu {
+            background-color: #6d4c41;
+            padding: 15px;
+            text-align: center;
+            margin-top: -10px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            margin: 0 10px;
+            display: inline-block;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .menu a:hover {
+            background-color: #a67c52;
+            transform: scale(1.05);
+        }
+        .container {
+            margin-top: 40px;
+            min-height: 60vh;
+        }
+        .pontos {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 60px;
+            font-weight: 700;
+            color: #8d5524;
+            margin: 20px 0;
+        }
+        button {
+            background: #8d5524;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background: #a67c52;
+            transform: scale(1.05);
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            width: 150px;
+            margin-right: 10px;
+            text-align: center;
+            border: 2px solid #8d5524;
+            border-radius: 5px;
+        }
+        .footer {
+            background-color: #6d4c41;
+            color: white;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="logo1.png"><br>
+        Pontuação Caatinga
+    </div>
+
+    <div class="menu">
+        <a href="index.html">🏠 Home</a>
+        <a href="caatinga.html">🌵 Caatinga</a>
+        <a href="mata_atlantica.html">🌿 Mata Atlântica</a>
+        <a href="amazonia.html">🌲 Amazônia</a>
+    </div>
+
+    <div class="container">
+        <h1>🌵 Bioma Caatinga</h1>
+        <h2>Pontos:</h2>
+        <p class="pontos" id="pontosCaatinga">0</p>
+
+        <button onclick="adicionarPontos(200)">Manifesto Verde (+200)</button>
+        <button onclick="adicionarPontos(300)">Desfile Ecológico (+300)</button>
+        <button onclick="adicionarPontos(200)">Arrecadação de Óleo (+200)</button>
+        <button onclick="adicionarPontos(250)">Adote seu Catador (+250)</button>
+        <button onclick="adicionarPontos(100)">Grito de Guerra (+100)</button>
+        <button onclick="adicionarPontos(100)">Bandeirão (+100)</button>
+        <button onclick="adicionarPontos(100)">Corrida Reciclada (+100)</button>
+        <button onclick="adicionarPontos(10)">Quiz (+10)</button>
+        <button onclick="adicionarPontos(30)">Desperdicio de Alimentos (+30)</button>
+        <button onclick="adicionarPontos(200)">Carimba (+200)</button>
+                <button onclick="adicionarPontos(200)">Futsal (+200)</button>
+        
+        <div style="margin-top: 20px;">
+            <input type="number" id="valorPersonalizado" placeholder="Digite um valor">
+            <button onclick="adicionarPontosPersonalizado()">Adicionar Pontos</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>Projeto ISCA 2025 - Todos os direitos reservados</strong></p>
+    </div>
+
+    <script>
+        let pontos = 0;
+        function adicionarPontos(valor) {
+            pontos += valor;
+            document.getElementById('pontosCaatinga').innerText = pontos;
+        }
+
+        function adicionarPontosPersonalizado() {
+            let valor = parseInt(document.getElementById('valorPersonalizado').value);
+            if (!isNaN(valor)) {
+                pontos += valor;
+                document.getElementById('pontosCaatinga').innerText = pontos;
+            } else {
+                alert("Digite um número válido!");
+            }
+        }
+    </script>
+
+</body>
+</html>
