@@ -92,7 +92,7 @@
 <body>
 
     <div class="header">
-        <img src="logo1.png"><br>
+        <img src="logo1.png" alt="Logo"><br>
         Pontuação Amazônia
     </div>
 
@@ -118,11 +118,15 @@
         <button onclick="adicionarPontos(10)">Quiz (+10)</button>
         <button onclick="adicionarPontos(30)">Desperdicio de Alimentos (+30)</button>
         <button onclick="adicionarPontos(200)">Carimba (+200)</button>
-                <button onclick="adicionarPontos(200)">Futsal (+200)</button>
+        <button onclick="adicionarPontos(200)">Futsal (+200)</button>
         
         <div style="margin-top: 20px;">
             <input type="number" id="valorPersonalizado" placeholder="Digite um valor">
             <button onclick="adicionarPontosPersonalizado()">Adicionar Pontos</button>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <button onclick="salvarPontos()">Salvar Pontos</button>
         </div>
     </div>
 
@@ -132,20 +136,45 @@
 
     <script>
         let pontos = 0;
-        function adicionarPontos(valor) {
-            pontos += valor;
+        
+        // Função para carregar a pontuação salva no localStorage
+        function carregarPontos() {
+            const pontosSalvos = localStorage.getItem('pontosAmazonia');
+            pontos = pontosSalvos ? parseInt(pontosSalvos) : 0;
             document.getElementById('pontosAmazonia').innerText = pontos;
         }
 
+        // Função para atualizar a exibição e salvar no localStorage
+        function atualizarPontos() {
+            document.getElementById('pontosAmazonia').innerText = pontos;
+            localStorage.setItem('pontosAmazonia', pontos);
+        }
+
+        // Função para adicionar pontos com base no valor passado
+        function adicionarPontos(valor) {
+            pontos += valor;
+            atualizarPontos();
+        }
+
+        // Função para adicionar pontos com valor personalizado
         function adicionarPontosPersonalizado() {
             let valor = parseInt(document.getElementById('valorPersonalizado').value);
             if (!isNaN(valor)) {
                 pontos += valor;
-                document.getElementById('pontosAmazonia').innerText = pontos;
+                atualizarPontos();
             } else {
                 alert("Digite um número válido!");
             }
         }
+
+        // Função para salvar manualmente os pontos
+        function salvarPontos() {
+            atualizarPontos();
+            alert("Pontuação salva!");
+        }
+
+        // Carrega a pontuação ao carregar a página
+        window.onload = carregarPontos;
     </script>
 
 </body>
