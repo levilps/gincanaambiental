@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mata Atlântica - Gincana Verde</title>
-    <
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@700&display=swap');
 
@@ -93,7 +92,7 @@
 <body>
 
     <div class="header">
-        <img src="logo1.png"> <br>
+        <img src="logo1.png" alt="Logo"> <br>
         Pontuação Mata Atlântica
     </div>
 
@@ -125,6 +124,10 @@
             <input type="number" id="valorPersonalizado" placeholder="Digite um valor">
             <button onclick="adicionarPontosPersonalizado()">Adicionar Pontos</button>
         </div>
+
+        <div style="margin-top: 20px;">
+            <button onclick="salvarPontos()">Salvar Pontos</button>
+        </div>
     </div>
 
     <div class="footer">
@@ -132,21 +135,47 @@
     </div>
 
     <script>
+        // Inicializa a variável de pontos
         let pontos = 0;
-        function adicionarPontos(valor) {
-            pontos += valor;
+
+        // Função para carregar a pontuação salva no localStorage
+        function carregarPontos() {
+            const pontosSalvos = localStorage.getItem('pontosMata');
+            pontos = pontosSalvos ? parseInt(pontosSalvos) : 0;
             document.getElementById('pontosMata').innerText = pontos;
         }
 
+        // Função para atualizar a exibição e salvar no localStorage
+        function atualizarPontos() {
+            document.getElementById('pontosMata').innerText = pontos;
+            localStorage.setItem('pontosMata', pontos);
+        }
+
+        // Função para adicionar pontos com base no valor passado
+        function adicionarPontos(valor) {
+            pontos += valor;
+            atualizarPontos();
+        }
+
+        // Função para adicionar pontos com valor personalizado
         function adicionarPontosPersonalizado() {
             let valor = parseInt(document.getElementById('valorPersonalizado').value);
             if (!isNaN(valor)) {
                 pontos += valor;
-                document.getElementById('pontosMata').innerText = pontos;
+                atualizarPontos();
             } else {
                 alert("Digite um número válido!");
             }
         }
+
+        // Função para salvar a pontuação (opcional, já salva automaticamente ao adicionar pontos)
+        function salvarPontos() {
+            atualizarPontos();
+            alert("Pontuação salva!");
+        }
+
+        // Carrega os pontos salvos ao carregar a página
+        window.onload = carregarPontos;
     </script>
 
 </body>
