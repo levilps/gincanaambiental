@@ -7,50 +7,66 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #d4edda;
       color: #155724;
       text-align: center;
       padding: 20px;
-      margin: 0;
     }
+
     .header {
       background-color: #0b6623;
       color: white;
-      padding: 20px;
-      font-size: 28px;
+      padding: 15px;
+      font-size: 22px;
       font-weight: bold;
     }
+
+    .header img {
+      max-width: 100px;
+      height: auto;
+    }
+
     .menu {
       background-color: #155724;
-      padding: 15px;
+      padding: 10px;
       text-align: center;
-      margin-top: -10px;
     }
+
     .menu a {
       color: white;
       text-decoration: none;
-      padding: 12px 20px;
-      margin: 0 10px;
+      padding: 10px 15px;
+      margin: 5px;
       display: inline-block;
-      font-size: 18px;
+      font-size: 16px;
       border-radius: 5px;
       transition: background 0.3s, transform 0.2s;
     }
+
     .menu a:hover {
       background-color: #218838;
       transform: scale(1.05);
     }
+
     .container {
-      margin-top: 40px;
+      margin-top: 30px;
       min-height: 60vh;
+      padding: 15px;
     }
+
     .descricao {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      font-size: 18px;
+      max-width: 90%;
+      margin: 20px auto;
+      padding: 15px;
+      font-size: 16px;
       background: white;
       border-radius: 10px;
       box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -58,19 +74,33 @@
       transform: translateY(20px);
       animation: fadeIn 1.5s forwards;
     }
+
     @keyframes fadeIn {
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+
     .footer {
       background-color: #155724;
       color: white;
-      padding: 20px;
-      position: relative;
-      bottom: 0;
+      padding: 15px;
       width: 100%;
-      text-align: center;
       font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .menu a {
+        font-size: 14px;
+        padding: 8px;
+      }
+      .header {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
