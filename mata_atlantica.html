@@ -9,21 +9,24 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #bbdefb; /* Azul claro */
-            color: #0d47a1; /* Azul escuro */
+            background-color: #bbdefb;
+            color: #0d47a1;
             text-align: center;
             padding: 20px;
             margin: 0;
         }
         .header {
-            background-color: #1565c0; /* Azul médio */
+            background-color: #1565c0;
             color: white;
             padding: 20px;
             font-size: 32px;
             font-weight: bold;
         }
+        .header img {
+            max-height: 80px;
+        }
         .menu {
-            background-color: #0d47a1; /* Azul escuro */
+            background-color: #0d47a1;
             padding: 15px;
             text-align: center;
             margin-top: -10px;
@@ -39,7 +42,7 @@
             transition: background 0.3s, transform 0.2s;
         }
         .menu a:hover {
-            background-color: #1976d2; /* Azul mais vivo */
+            background-color: #1976d2;
             transform: scale(1.05);
         }
         .container {
@@ -50,11 +53,11 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 60px;
             font-weight: 700;
-            color: #0d47a1; /* Azul escuro */
+            color: #0d47a1;
             margin: 20px 0;
         }
         button {
-            background: #1565c0; /* Azul médio */
+            background: #1565c0;
             color: white;
             border: none;
             padding: 15px 20px;
@@ -74,13 +77,13 @@
             padding: 10px;
             font-size: 18px;
             width: 150px;
-            margin-right: 10px;
+            margin: 10px 5px;
             text-align: center;
             border: 2px solid #0d47a1;
             border-radius: 5px;
         }
         .footer {
-            background-color: #0d47a1; /* Azul escuro */
+            background-color: #0d47a1;
             color: white;
             padding: 20px;
             position: relative;
@@ -89,8 +92,6 @@
             text-align: center;
             font-size: 14px;
         }
-
-        /* Responsividade */
         @media (max-width: 768px) {
             .header {
                 font-size: 28px;
@@ -147,6 +148,7 @@
         <div style="margin-top: 20px;">
             <input type="number" id="valorPersonalizado" placeholder="Digite um valor">
             <button onclick="adicionarPontosPersonalizado()">Adicionar Pontos</button>
+            <button onclick="removerPontosPersonalizado()">Remover Pontos</button>
         </div>
 
         <div style="margin-top: 20px;">
@@ -159,29 +161,24 @@
     </div>
 
     <script>
-        // Inicializa a variável de pontos
         let pontos = 0;
 
-        // Função para carregar a pontuação salva no localStorage
         function carregarPontos() {
             const pontosSalvos = localStorage.getItem('pontosMata');
             pontos = pontosSalvos ? parseInt(pontosSalvos) : 0;
             document.getElementById('pontosMata').innerText = pontos;
         }
 
-        // Função para atualizar a exibição e salvar no localStorage
         function atualizarPontos() {
             document.getElementById('pontosMata').innerText = pontos;
             localStorage.setItem('pontosMata', pontos);
         }
 
-        // Função para adicionar pontos com base no valor passado
         function adicionarPontos(valor) {
             pontos += valor;
             atualizarPontos();
         }
 
-        // Função para adicionar pontos com valor personalizado
         function adicionarPontosPersonalizado() {
             let valor = parseInt(document.getElementById('valorPersonalizado').value);
             if (!isNaN(valor)) {
@@ -192,13 +189,21 @@
             }
         }
 
-        // Função para salvar a pontuação (opcional, já salva automaticamente ao adicionar pontos)
+        function removerPontosPersonalizado() {
+            let valor = parseInt(document.getElementById('valorPersonalizado').value);
+            if (!isNaN(valor)) {
+                pontos -= valor;
+                atualizarPontos();
+            } else {
+                alert("Digite um número válido!");
+            }
+        }
+
         function salvarPontos() {
             atualizarPontos();
             alert("Pontuação salva!");
         }
 
-        // Carrega os pontos salvos ao carregar a página
         window.onload = carregarPontos;
     </script>
 
