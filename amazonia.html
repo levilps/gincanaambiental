@@ -73,24 +73,23 @@
         input {
             padding: 10px;
             font-size: 18px;
-            width: 150px;
+            width: 100%;
+            max-width: 150px;
             margin-right: 10px;
             text-align: center;
             border: 2px solid #0d47a1;
             border-radius: 5px;
+            margin-top: 10px;
         }
         .footer {
             background-color: #1b5e20;
             color: white;
             padding: 20px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
             text-align: center;
             font-size: 14px;
+            margin-top: 20px;
         }
 
-        /* Responsividade */
         @media (max-width: 768px) {
             .header {
                 font-size: 28px;
@@ -108,7 +107,7 @@
                 max-width: 90%;
             }
             input {
-                width: 90%;
+                max-width: 90%;
             }
         }
     </style>
@@ -116,7 +115,7 @@
 <body>
 
     <div class="header">
-        <img src="logo1.png" alt="Logo"><br>
+        <img src="logo1.png" alt="Logo" style="max-width: 120px;"><br>
         Pontuação Amazônia
     </div>
 
@@ -143,12 +142,17 @@
         <button onclick="adicionarPontos(30)">Desperdício de Alimentos (+30)</button>
         <button onclick="adicionarPontos(200)">Carimba (+200)</button>
         <button onclick="adicionarPontos(200)">Futsal (+200)</button>
-        
+
         <div style="margin-top: 20px;">
             <input type="number" id="valorPersonalizado" placeholder="Digite um valor">
             <button onclick="adicionarPontosPersonalizado()">Adicionar Pontos</button>
         </div>
-        
+
+        <div style="margin-top: 20px;">
+            <input type="number" id="valorRemover" placeholder="Valor a remover">
+            <button onclick="removerPontosPersonalizado()">Remover Pontos</button>
+        </div>
+
         <div style="margin-top: 20px;">
             <button onclick="salvarPontos()">Salvar Pontos</button>
         </div>
@@ -160,27 +164,23 @@
 
     <script>
         let pontos = 0;
-        
-        // Função para carregar a pontuação salva no localStorage
+
         function carregarPontos() {
             const pontosSalvos = localStorage.getItem('pontosAmazonia');
             pontos = pontosSalvos ? parseInt(pontosSalvos) : 0;
             document.getElementById('pontosAmazonia').innerText = pontos;
         }
 
-        // Função para atualizar a exibição e salvar no localStorage
         function atualizarPontos() {
             document.getElementById('pontosAmazonia').innerText = pontos;
             localStorage.setItem('pontosAmazonia', pontos);
         }
 
-        // Função para adicionar pontos com base no valor passado
         function adicionarPontos(valor) {
             pontos += valor;
             atualizarPontos();
         }
 
-        // Função para adicionar pontos com valor personalizado
         function adicionarPontosPersonalizado() {
             let valor = parseInt(document.getElementById('valorPersonalizado').value);
             if (!isNaN(valor)) {
@@ -191,13 +191,22 @@
             }
         }
 
-        // Função para salvar manualmente os pontos
+        function removerPontosPersonalizado() {
+            let valor = parseInt(document.getElementById('valorRemover').value);
+            if (!isNaN(valor)) {
+                pontos -= valor;
+                if (pontos < 0) pontos = 0;
+                atualizarPontos();
+            } else {
+                alert("Digite um número válido!");
+            }
+        }
+
         function salvarPontos() {
             atualizarPontos();
             alert("Pontuação salva!");
         }
 
-        // Carrega a pontuação ao carregar a página
         window.onload = carregarPontos;
     </script>
 
