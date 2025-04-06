@@ -95,7 +95,6 @@
             margin-top: 20px;
         }
 
-        /* Media Queries para dispositivos móveis */
         @media (max-width: 768px) {
             .header {
                 font-size: 24px;
@@ -121,7 +120,7 @@
 <body>
 
     <div class="header">
-        <img src="logo1.png" alt="Logo"><br>
+        <img src="logo1.png" alt="Logo" style="max-width: 120px;"><br>
         Pontuação Caatinga
     </div>
 
@@ -148,12 +147,17 @@
         <button onclick="adicionarPontos(30)">Desperdício de Alimentos (+30)</button>
         <button onclick="adicionarPontos(200)">Carimba (+200)</button>
         <button onclick="adicionarPontos(200)">Futsal (+200)</button>
-        
+
         <div style="margin-top: 20px;">
             <input type="number" id="valorPersonalizado" placeholder="Digite um valor">
             <button onclick="adicionarPontosPersonalizado()">Adicionar Pontos</button>
         </div>
-        
+
+        <div style="margin-top: 20px;">
+            <input type="number" id="valorRemover" placeholder="Valor a remover">
+            <button onclick="removerPontosPersonalizado()">Remover Pontos</button>
+        </div>
+
         <div style="margin-top: 20px;">
             <button onclick="salvarPontos()">Salvar Pontos</button>
         </div>
@@ -165,27 +169,23 @@
 
     <script>
         let pontos = 0;
-        
-        // Carrega a pontuação salva no localStorage ao iniciar a página
+
         function carregarPontos() {
             const pontosSalvos = localStorage.getItem('pontosCaatinga');
             pontos = pontosSalvos ? parseInt(pontosSalvos) : 0;
             document.getElementById('pontosCaatinga').innerText = pontos;
         }
-        
-        // Atualiza a exibição e salva a pontuação no localStorage
+
         function atualizarPontos() {
             document.getElementById('pontosCaatinga').innerText = pontos;
             localStorage.setItem('pontosCaatinga', pontos);
         }
-        
-        // Adiciona pontos com base no valor passado
+
         function adicionarPontos(valor) {
             pontos += valor;
             atualizarPontos();
         }
-        
-        // Adiciona pontos com um valor personalizado
+
         function adicionarPontosPersonalizado() {
             let valor = parseInt(document.getElementById('valorPersonalizado').value);
             if (!isNaN(valor)) {
@@ -195,14 +195,23 @@
                 alert("Digite um número válido!");
             }
         }
-        
-        // Função para salvar manualmente os pontos
+
+        function removerPontosPersonalizado() {
+            let valor = parseInt(document.getElementById('valorRemover').value);
+            if (!isNaN(valor)) {
+                pontos -= valor;
+                if (pontos < 0) pontos = 0;
+                atualizarPontos();
+            } else {
+                alert("Digite um número válido!");
+            }
+        }
+
         function salvarPontos() {
             atualizarPontos();
             alert("Pontuação salva!");
         }
-        
-        // Carrega a pontuação ao carregar a página
+
         window.onload = carregarPontos;
     </script>
 
